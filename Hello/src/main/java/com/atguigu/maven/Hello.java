@@ -4,8 +4,8 @@ public class Hello {
 		return "Hello "+name+"!";
 	}
 	
-	public static void main(String[] args) {
-		Hello hello = new Hello();
-		System.out.println(hello.sayHello("zs"));
-	}
+//	public static void main(String[] args) {
+//		Hello hello = new Hello();
+//		System.out.println(hello.sayHello("哈哈哈哈"));
+//	}
 }

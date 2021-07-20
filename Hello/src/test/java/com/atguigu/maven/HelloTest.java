@@ -5,7 +5,7 @@ package com.atguigu.maven;
 		@Test
 		public void testHello(){
 			Hello hello = new Hello();
-			String results = hello.sayHello("litingwei");
-			assertEquals("Hello litingwei!",results);	
+			String results = hello.sayHello("哈哈");
+			assertEquals("Hello 哈哈!",results);	
 		}
 	}
