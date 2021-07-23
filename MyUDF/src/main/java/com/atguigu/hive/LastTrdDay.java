@@ -84,9 +84,9 @@ public class LastTrdDay extends UDF {
 		return str;
 	}
 
-	public static void main(String[] args) {
-		LastTrdDay lastTrdDay = new LastTrdDay();
-		String string = lastTrdDay.evaluate("20210721", -30);
-		System.out.println(string);
-	}
+//	public static void main(String[] args) {
+//		LastTrdDay lastTrdDay = new LastTrdDay();
+//		String string = lastTrdDay.evaluate("20210721", -30);
+//		System.out.println(string);
+//	}
 }
