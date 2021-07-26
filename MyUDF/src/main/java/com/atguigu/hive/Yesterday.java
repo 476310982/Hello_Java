@@ -28,10 +28,10 @@ public class Yesterday extends UDF {
 		}
 		return str;
 	}
-//
-//	public static void main(String[] args) {
-//		Yesterday yes = new Yesterday();
-//		String res = yes.reYestoday("20200101");
-//		System.out.println(res);
-//	}
+
+	public static void main(String[] args) {
+		Yesterday yes = new Yesterday();
+		String res = yes.evaluate("20200101");
+		System.out.println(res);
+	}
 }

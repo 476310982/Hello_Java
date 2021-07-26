@@ -4,12 +4,44 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.HashMap;
 import java.util.Properties;
 
-import sun.tools.tree.ThisExpression;
-
 public class PropertiesUtil {
-	public static void main(String[] args) throws IOException {
+	private String url;
+	private String driver;
+	private String username;
+	private String password;
+	private Properties properties;
+	private String filename;
+
+	public PropertiesUtil() {
+		try {
+			this.filename = "jdbc.properties";
+			InputStream inputStream = PropertiesUtil.class.getClassLoader().getResourceAsStream(this.filename);
+			this.properties = new Properties();
+			this.properties.load(inputStream);
+		} catch (IOException e) {
+			System.out.println("IO Exception");
+		} catch (Exception e) {
+			System.out.println("ÅäÖÃÎÄ¼ş²»´æÔÚ!");
+		}
+	}
+
+	public PropertiesUtil(String FileName) {
+		try {
+			this.filename = FileName;
+			InputStream inputStream = PropertiesUtil.class.getClassLoader().getResourceAsStream(this.filename);
+			this.properties = new Properties();
+			this.properties.load(inputStream);
+		} catch (IOException e) {
+			System.out.println("IO Exception");
+		} catch (Exception e) {
+			System.out.println("ÅäÖÃÎÄ¼ş²»´æÔÚ!");
+		}
+	}
+
+//	public static void main(String[] args) throws IOException {
 //		Properties properties = new Properties();
 //		OutputStream output = null;
 //		try {
@@ -19,7 +51,7 @@ public class PropertiesUtil {
 //			properties.setProperty("jdbc.username", "root");
 //			properties.setProperty("jdbc.password", "rootroot");
 //
-//			// ä¿å­˜é”®å€¼å¯¹åˆ°æ–‡ä»¶ä¸­
+//			// ±£´æ¼üÖµ¶Ôµ½ÎÄ¼şÖĞ
 ////			properties.store(output, "Thinkingcao modify");
 //			properties.store(output, "Maxwell");
 //		} catch (IOException io) {
@@ -32,22 +64,60 @@ public class PropertiesUtil {
 //					e.printStackTrace();
 //				}
 //			}
-//			System.out.println("ä¿å­˜é…ç½®æ–‡ä»¶");
+//			System.out.println("±£´æÅäÖÃÎÄ¼ş");
 //		}
-		// å¼€å§‹è¯»å–æ•°æ®
-		PropertiesUtil propertiesUtil = new PropertiesUtil();
-//		propertiesUtil.test1();
-	
+//	}
+
+	public String getUrl() {
+		return this.properties.getProperty("jdbc.url");
 	}
 
-	public void test1() throws IOException {		
-		InputStream inputStream = this.getClass().getResourceAsStream("src/main/resources/jdbc.properties");
-		Properties properties = new Properties();
-		properties.load(inputStream);
-		properties.list(System.out);
-		System.out.println("==============================================");
-		String property = properties.getProperty("jdbc.url");
-		System.out.println("property = " + property);
+	public String getDriver() {
+		return this.properties.getProperty("jdbc.driver");
 	}
+
+	public String getUsername() {
+		return this.properties.getProperty("jdbc.username");
+	}
+
+	public String getPassword() {
+		return this.properties.getProperty("jdbc.password");
+	}
+
+	public void storeProperties(String FileName, HashMap<String, String> kv) {
+		OutputStream output = null;
+		try {
+			output = new FileOutputStream("src/main/resources/" + FileName);
+			for (String key : kv.keySet()) {
+				this.properties.setProperty(key, kv.get(key));
+			}
+
+			// ±£´æ¼üÖµ¶Ôµ½ÎÄ¼şÖĞ
+			properties.store(output, "Maxwell");
+		} catch (IOException io) {
+			io.printStackTrace();
+		} finally {
+			if (output != null) {
+				try {
+					output.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			System.out.println("±£´æÅäÖÃÎÄ¼ş");
+		}
+	}
+
+	/* ²âÊÔ¼üÖµ¶Ô²ÎÊı¶ÁÈ¡ */
+//	public static void main(String[] args) {
+//		PropertiesUtil propertiesUtil = new PropertiesUtil("test.properties");
+//		HashMap hashMap = new HashMap<String, String>();
+//		hashMap.put("username", "Maxwell");
+//		hashMap.put("password", "rootroot");
+//		// System.out.println(hashMap);
+//		propertiesUtil.storeProperties("test.properties", hashMap);
+//		System.out.println(propertiesUtil.getDriver());
+//		System.out.println(propertiesUtil.getUsername());
+//	}
 
 }

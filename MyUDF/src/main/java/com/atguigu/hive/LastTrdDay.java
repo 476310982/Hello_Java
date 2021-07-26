@@ -14,7 +14,7 @@ import org.apache.hadoop.hive.ql.exec.UDF;
 
 public class LastTrdDay extends UDF {
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-	static final String DB_URL = "jdbc:mysql://192.168.102.101:3306/dsc_cfg";
+	static final String DB_URL = "jdbc:mysql://192.168.1.101:3306/dsc_cfg?useSSL=false";
 	static final String USER = "root";
 	static final String PASS = "rootroot";
 
@@ -54,9 +54,6 @@ public class LastTrdDay extends UDF {
 			while (rs.next()) {
 				// 通过字段检索
 				str = rs.getString("JYR");
-//				int id = rs.getInt("id");
-//				String name = rs.getString("name");
-//				String url = rs.getString("url");
 			}
 			// 完成后关闭
 			rs.close();
@@ -84,9 +81,9 @@ public class LastTrdDay extends UDF {
 		return str;
 	}
 
-//	public static void main(String[] args) {
-//		LastTrdDay lastTrdDay = new LastTrdDay();
-//		String string = lastTrdDay.evaluate("20210721", -30);
-//		System.out.println(string);
-//	}
+	public static void main(String[] args) {
+		LastTrdDay lastTrdDay = new LastTrdDay();
+		String string = lastTrdDay.evaluate("20210721", -30);
+		System.out.println(string);
+	}
 }
